@@ -103,7 +103,7 @@ function generate(count: number, digit: number) {
         }
         numbers[digits] = generation;
       }
-      let num = numbers.join('');
+      let num = +numbers.join('');
 
       if (arr.indexOf(num) == -1) {
         i = i + 1;
