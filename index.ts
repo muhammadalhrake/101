@@ -102,7 +102,7 @@ function ozoGeneration(
   }
   return generationArr;
 }
-
+console.log(55);
 //console.log(arr);
 //setInterval(()=>console.log(ozoGeneration(40,['1','2','7'],['1','2','5'],['Easy','medium','Difficult'])),500)
 // Write TypeScript code!
