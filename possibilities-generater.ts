@@ -13,29 +13,24 @@ function possibilitiesGenerater(
   digits: number,
   level: string
 ) {
-  let numbers: string[];
+  let possibelNumber: string[] = [];
   for (let i = 1; i <= 9; i++) {
-    for (let j = 0; j <= 9; ) {
-      let possibelNumber = [''];
-      for (let k = 0; k <= 9; ) {
-        if (digits == 1) {
-          possibelNumber.push(i.toString());
-          i++;
-        } else if (digits == 2) {
+    if (digits == 1) {
+      possibelNumber.push(i.toString());
+    } else {
+      for (let j = 0; j <= 9; j++) {
+        if (digits == 2) {
           possibelNumber.push(i.toString() + j.toString());
-          i++;
-          j++;
-        } else if (digits == 3) {
-          possibelNumber.push(i.toString() + j.toString() + k.toString());
-          i++;
-          j++;
-          k++;
+        } else {
+          for (let k = 0; k <= 9; k++) {
+            possibelNumber.push(i.toString() + j.toString() + k.toString());
+          }
         }
       }
-      numbers.push(possibelNumber.join(''));
     }
   }
-  possibilityTree[rules][digits][level] = numbers;
+  //console.log(possibelNumber);
+  possibilityTree[rules][digits][level] = possibelNumber;
   return possibilityTree;
 }
 
@@ -45,9 +40,15 @@ export function generateForFirstThreeDigits(
   digits: number,
   level: string
 ) {
-  let levelArrayLength = possibilityTree[rules][digits][level].length;
-  if (levelArrayLength == 0) {
-    possibilitiesGenerater(possibilityTree, rules, digits, level);
+  //console.log(rules, digits, level);
+  possibilityTree[rules][digits][level].splice(0, 1);
+  if (possibilityTree[rules][digits][level].length == 0) {
+    possibilityTree = possibilitiesGenerater(
+      possibilityTree,
+      rules,
+      digits,
+      level
+    );
   }
   let copyArr = {
     possibel: possibilityTree,
@@ -57,11 +58,16 @@ export function generateForFirstThreeDigits(
       secondNumber: 5
     }
   };
-
+  //console.log(possibilityTree[rules][digits][level])
   try {
-    let fNum = +(rules + '0' + rules);
-    let randomSelect = between(0, levelArrayLength - 1);
+    let fNum = +(rules.toString() + '0' + rules.toString());
+    let randomSelect = between(
+      0,
+      possibilityTree[rules][digits][level].length - 1
+    );
+    //console.log(possibilityTree[rules][digits][level].length);
     let sNum = possibilityTree[rules][digits][level][randomSelect];
+    //console.log(sNum);
     copyArr.possibel[rules][digits][level] = possibilityTree[rules][digits][
       level
     ].filter(value => value != sNum);
@@ -87,33 +93,30 @@ export function generateForLastDigits(
       secondNumber: 5
     }
   };
-  try {
-    let numbers = [''];
-    for (let digits = 1; digits <= digits; digits++) {
-      let generation;
-      if (digits == 1) {
-        generation = firstDigits();
-      } else {
-        generation = lastDigits();
-      }
-      numbers[digits] = generation;
-    }
-    let num = +numbers.join('');
-
-    if (arr.indexOf(num) == -1) {
-      let fNum = +(rules + '0' + rules);
-      let sNum = num;
-      arr.push(num);
-      copyOf.generationArr = arr;
-      copyOf.generate.answers = ansArray(fNum, sNum);
-      copyOf.generate.firstNumber = fNum;
-      copyOf.generate.secondNumber = sNum;
+  let numbers = [''];
+  for (let digit = 1; digit <= digits; digit++) {
+    let generation;
+    if (digit == 1) {
+      generation = firstDigits();
     } else {
-      generateForLastDigits(arr, rules, digits);
+      generation = lastDigits();
     }
-  } catch (err) {
-    throw Error();
+    numbers[digit] = generation;
   }
+  let num = +numbers.join('');
+
+  if (arr.indexOf(num) == -1) {
+    let fNum = +(rules.toString() + '0' + rules.toString());
+    let sNum = num;
+    arr.push(num);
+    copyOf.generationArr = arr;
+    copyOf.generate.answers = ansArray(fNum, sNum);
+    copyOf.generate.firstNumber = fNum;
+    copyOf.generate.secondNumber = sNum;
+  } else {
+    return generateForLastDigits(arr, rules, digits);
+  }
+
   return copyOf;
 }
 

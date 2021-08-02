@@ -65,9 +65,9 @@ function ozoGeneration(
   let generationArr = new Array<monad>();
   try {
     for (let i = 0; i < count; ) {
-      for (let j = 0; j < rules.length; j++) {
-        for (let k = 0; k < digits.length; k++) {
-          for (let l = 0; l < levels.length; l++) {
+      for (let j = 0; j < rules.length && i < count; j++) {
+        for (let k = 0; k < digits.length && i < count; k++) {
+          for (let l = 0; l < levels.length && i < count; l++) {
             //initial settings
             let generateQuestion;
             let rule = +rules[j];
@@ -102,8 +102,8 @@ function ozoGeneration(
   }
   return generationArr;
 }
-console.log(55);
-//console.log(arr);
+console.log(generateForLastDigits(possibilityArrForMoreThanThreeDigits, 5, 5))
+//console.log(possibilityTree[1][1]['Difficult'])
 //setInterval(()=>console.log(ozoGeneration(40,['1','2','7'],['1','2','5'],['Easy','medium','Difficult'])),500)
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
