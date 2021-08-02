@@ -70,7 +70,51 @@ function generateForFirstThreeDigits(
   return copyArr;
 }
 
+function generateForLastDigits(arr: number[], rules: number, digits: number) {
+  let copyOf = {
+    generationArr: [0],
+    generate: {
+      answers: [5, 5, 5, 5],
+      firstNumber: 5,
+      secondNumber: 5
+    }
+  };
+  try {
+    let numbers = [''];
+    for (let digits = 1; digits <= digits; digits++) {
+      let generation;
+      if (digits == 1) {
+        generation = firstDigits();
+      } else {
+        generation = secondsDigits2();
+      }
+      numbers[digits] = generation;
+    }
+    let num = +numbers.join('');
 
-function generateForLastDigits(){
-  
+    if (arr.indexOf(num) == -1) {
+      let fNum = +(rules + '0' + rules);
+      let sNum = num;
+      arr.push(num);
+      copyOf.generationArr = arr;
+      copyOf.generate.answers = ansArray(fNum, sNum);
+      copyOf.generate.firstNumber = fNum;
+      copyOf.generate.secondNumber = sNum;
+    } else {
+      return generateForLastDigits(arr, rules, digits);
+    }
+  } catch (err) {
+    throw Error();
+  }
+  return copyOf;
+}
+
+function firstDigits() {
+  return between(1, 4);
+}
+function secondsDigits2() {
+  return between(0, 4);
+}
+function generate(count: number, digit: number) {
+  let arr = new Array();
 }
