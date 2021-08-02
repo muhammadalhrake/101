@@ -39,7 +39,7 @@ function possibilitiesGenerater(
   return possibilityTree;
 }
 
-function generateForFirstThreeDigits(
+export function generateForFirstThreeDigits(
   possibilityTree: PossibilityTree,
   rules: number,
   digits: number,
@@ -70,7 +70,11 @@ function generateForFirstThreeDigits(
   return copyArr;
 }
 
-function generateForLastDigits(arr: number[], rules: number, digits: number) {
+export function generateForLastDigits(
+  arr: number[],
+  rules: number,
+  digits: number
+) {
   let copyOf = {
     generationArr: [0],
     generate: {
@@ -86,7 +90,7 @@ function generateForLastDigits(arr: number[], rules: number, digits: number) {
       if (digits == 1) {
         generation = firstDigits();
       } else {
-        generation = secondsDigits2();
+        generation = lastDigits();
       }
       numbers[digits] = generation;
     }
@@ -112,6 +116,6 @@ function generateForLastDigits(arr: number[], rules: number, digits: number) {
 function firstDigits() {
   return between(1, 4);
 }
-function secondsDigits2() {
+function lastDigits() {
   return between(0, 4);
 }
