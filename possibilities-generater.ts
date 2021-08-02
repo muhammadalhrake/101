@@ -115,6 +115,3 @@ function firstDigits() {
 function secondsDigits2() {
   return between(0, 4);
 }
-function generate(count: number, digit: number) {
-  let arr = new Array();
-}
