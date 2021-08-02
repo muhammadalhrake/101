@@ -1,6 +1,5 @@
 // Import stylesheets
 import './style.css';
-import random from 'random';
 import { monad, PossibilityTree } from './101.model';
 import {
   generateForFirstThreeDigits,
@@ -99,13 +98,13 @@ function ozoGeneration(
       }
     }
   } catch (err) {
-    throw Error(err);
+    console.log(err);
   }
   return generationArr;
 }
 
 //console.log(arr);
-//setInterval(()=>console.log(generate(40,5)),500)
+//setInterval(()=>console.log(ozoGeneration(40,['1','2','7'],['1','2','5'],['Easy','medium','Difficult'])),500)
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
