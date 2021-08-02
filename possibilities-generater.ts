@@ -39,7 +39,7 @@ function possibilitiesGenerater(
   return possibilityTree;
 }
 
-function generateForFirstThreeDegets(
+function generateForFirstThreeDigits(
   possibilityTree: PossibilityTree,
   rules: number,
   digits: number,
@@ -68,4 +68,9 @@ function generateForFirstThreeDegets(
   copyArr.generate.firstNumber = fNum;
   copyArr.generate.secondNumber = +sNum;
   return copyArr;
+}
+
+
+function generateForLastDigits(){
+  
 }
