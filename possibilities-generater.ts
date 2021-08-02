@@ -1,4 +1,12 @@
+import random from 'random';
 import { PossibilityTree } from './101.model';
+import { ansArray } from './101Anwers';
+
+///helper function
+function between(min: number, max: number) {
+  return random.int(min, max);
+}
+
 function possibilitiesGenerater(
   possibilityTree: PossibilityTree,
   rules: number,
@@ -37,7 +45,8 @@ function generateForFirstThreeDegets(
   digits: number,
   level: string
 ) {
-  if (possibilityTree[rules][digits][level].length == 0) {
+  let levelArrayLength = possibilityTree[rules][digits][level].length;
+  if (levelArrayLength == 0) {
     possibilitiesGenerater(possibilityTree, rules, digits, level);
   }
   let copyArr = {
@@ -48,4 +57,15 @@ function generateForFirstThreeDegets(
       secondNumber: 5
     }
   };
+
+  let fNum = +(rules + '0' + rules);
+  let randomSelect = between(0, levelArrayLength - 1);
+  let sNum = possibilityTree[rules][digits][level][randomSelect];
+  copyArr.possibel[rules][digits][level] = possibilityTree[rules][digits][
+    level
+  ].filter(value => value != sNum);
+  copyArr.generate.answers = ansArray(fNum, +sNum);
+  copyArr.generate.firstNumber = fNum;
+  copyArr.generate.secondNumber = +sNum;
+  return copyArr;
 }
