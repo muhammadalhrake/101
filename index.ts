@@ -1,7 +1,11 @@
 // Import stylesheets
 import './style.css';
 import random from 'random';
-import { PossibilityTree } from './101.model';
+import { monad, PossibilityTree } from './101.model';
+import {
+  generateForFirstThreeDigits,
+  generateForLastDigits
+} from './possibilities-generater';
 
 let possibilityTree: PossibilityTree = {
   1: {
@@ -59,15 +63,37 @@ function ozoGeneration(
   digits: string[],
   levels: string[]
 ) {
+  let generationArr = new Array<monad>();
   try {
     for (let i = 0; i < count; ) {
       for (let j = 0; j < rules.length; j++) {
         for (let k = 0; k < digits.length; k++) {
           for (let l = 0; l < levels.length; l++) {
             //initial settings
-            let rule = rules[j];
-            let digit = digits[k];
+            let generateQuestion;
+            let rule = +rules[j];
+            let digit = +digits[k];
             let level = levels[l];
+            if (digit <= 3) {
+              let status = generateForFirstThreeDigits(
+                possibilityTree,
+                rule,
+                digit,
+                level
+              );
+              possibilityTree = status.possibel;
+              generateQuestion = status.generate;
+            } else {
+              let status = generateForLastDigits(
+                possibilityArrForMoreThanThreeDigits,
+                rule,
+                digit
+              );
+              possibilityArrForMoreThanThreeDigits = status.generationArr;
+              generateQuestion = status.generate;
+            }
+            generationArr.push(generateQuestion);
+            i++;
           }
         }
       }
@@ -75,6 +101,7 @@ function ozoGeneration(
   } catch (err) {
     throw Error(err);
   }
+  return generationArr;
 }
 
 //console.log(arr);

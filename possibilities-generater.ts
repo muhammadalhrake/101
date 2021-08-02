@@ -58,15 +58,19 @@ export function generateForFirstThreeDigits(
     }
   };
 
-  let fNum = +(rules + '0' + rules);
-  let randomSelect = between(0, levelArrayLength - 1);
-  let sNum = possibilityTree[rules][digits][level][randomSelect];
-  copyArr.possibel[rules][digits][level] = possibilityTree[rules][digits][
-    level
-  ].filter(value => value != sNum);
-  copyArr.generate.answers = ansArray(fNum, +sNum);
-  copyArr.generate.firstNumber = fNum;
-  copyArr.generate.secondNumber = +sNum;
+  try {
+    let fNum = +(rules + '0' + rules);
+    let randomSelect = between(0, levelArrayLength - 1);
+    let sNum = possibilityTree[rules][digits][level][randomSelect];
+    copyArr.possibel[rules][digits][level] = possibilityTree[rules][digits][
+      level
+    ].filter(value => value != sNum);
+    copyArr.generate.answers = ansArray(fNum, +sNum);
+    copyArr.generate.firstNumber = fNum;
+    copyArr.generate.secondNumber = +sNum;
+  } catch (err) {
+    throw Error(err);
+  }
   return copyArr;
 }
 
@@ -105,7 +109,7 @@ export function generateForLastDigits(
       copyOf.generate.firstNumber = fNum;
       copyOf.generate.secondNumber = sNum;
     } else {
-      return generateForLastDigits(arr, rules, digits);
+      generateForLastDigits(arr, rules, digits);
     }
   } catch (err) {
     throw Error();
