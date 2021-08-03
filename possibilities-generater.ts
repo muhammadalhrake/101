@@ -83,7 +83,8 @@ export function generateForFirstThreeDigits(
 export function generateForLastDigits(
   arr: number[],
   rules: number,
-  digits: number
+  digits: number,
+  level: string
 ) {
   let copyOf = {
     generationArr: [0],
@@ -96,10 +97,20 @@ export function generateForLastDigits(
   let numbers = [''];
   for (let digit = 1; digit <= digits; digit++) {
     let generation;
-    if (digit == 1) {
-      generation = firstEasyDigits();
-    } else {
-      generation = lastEasyDigits();
+    if (level == 'Easy') {
+      if (digit == 1) {
+        generation = firstEasyDigits();
+      } else {
+        generation = lastEasyDigits();
+      }
+    } else if (level == 'medium') {
+      if (digit % 2 == 0) {
+        generation = firstEasyDigits();
+      } else {
+        generation = firstDifficultDigits();
+      }
+    } else if (level == 'Difficult') {
+      generation = firstDifficultDigits();
     }
     numbers[digit] = generation;
   }
@@ -114,7 +125,7 @@ export function generateForLastDigits(
     copyOf.generate.firstNumber = fNum;
     copyOf.generate.secondNumber = sNum;
   } else {
-    return generateForLastDigits(arr, rules, digits);
+    return generateForLastDigits(arr, rules, digits, level);
   }
 
   return copyOf;

@@ -86,7 +86,8 @@ function ozoGeneration(
               let status = generateForLastDigits(
                 possibilityArrForMoreThanThreeDigits,
                 rule,
-                digit
+                digit,
+                level
               );
               possibilityArrForMoreThanThreeDigits = status.generationArr;
               generateQuestion = status.generate;
@@ -102,7 +103,7 @@ function ozoGeneration(
   }
   return generationArr;
 }
-//setInterval(()=>console.log(generateForLastDigits(possibilityArrForMoreThanThreeDigits, 5, 5)),500)
+//setInterval(()=>console.log(generateForLastDigits(possibilityArrForMoreThanThreeDigits, 5, 5,'medium')),500)
 //console.log(possibilityTree[1][1]['Difficult'])
 //setInterval(()=>console.log(ozoGeneration(40,['1','2','7'],['1','2','5'],['Easy','medium','Difficult'])),500)
 // Write TypeScript code!
