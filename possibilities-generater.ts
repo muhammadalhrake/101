@@ -97,9 +97,9 @@ export function generateForLastDigits(
   for (let digit = 1; digit <= digits; digit++) {
     let generation;
     if (digit == 1) {
-      generation = firstDigits();
+      generation = firstEasyDigits();
     } else {
-      generation = lastDigits();
+      generation = lastEasyDigits();
     }
     numbers[digit] = generation;
   }
@@ -119,10 +119,8 @@ export function generateForLastDigits(
 
   return copyOf;
 }
-
-function firstDigits() {
-  return between(1, 4);
-}
-function lastDigits() {
-  return between(0, 4);
-}
+///random for easy digits
+const firstEasyDigits = () => between(1, 4);
+const lastEasyDigits = () => between(0, 4);
+///for difficult digits
+const firstDifficultDigits = () => between(5, 9);
