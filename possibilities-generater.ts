@@ -7,7 +7,7 @@ function between(min: number, max: number) {
   return random.int(min, max);
 }
 
-function possibilitiesGenerater(
+function possibilitiesGenerator(
   possibilityTree: PossibilityTree,
   rules: number,
   digits: number,
@@ -43,7 +43,7 @@ export function generateForFirstThreeDigits(
   //console.log(rules, digits, level);
   possibilityTree[rules][digits][level].splice(0, 1);
   if (possibilityTree[rules][digits][level].length == 0) {
-    possibilityTree = possibilitiesGenerater(
+    possibilityTree = possibilitiesGenerator(
       possibilityTree,
       rules,
       digits,
