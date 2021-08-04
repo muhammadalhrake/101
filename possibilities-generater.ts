@@ -28,10 +28,18 @@ function possibilitiesGenerator(
       generateNum = ez1;
     } else if (digits == 2) {
       let merged = ez1.map(f => ez2.map(s => f + s));
-      generateNum = merged.flat();
+      generateNum = merged.reduce(
+        (accumulator, value) => accumulator.concat(value),
+        []
+      );
     } else if (digits == 3) {
-      let merged = ez1.map(f => ez2.map(s => ez2.map(th => f + s + th)));
-      generateNum = merged.flat(2);
+      let merged = ez1
+        .map(f => ez2.map(s => ez2.map(th => f + s + th)))
+        .reduce((accumulator, value) => accumulator.concat(value), []);
+      generateNum = merged.reduce(
+        (accumulator, value) => accumulator.concat(value),
+        []
+      );
       //console.log(generateNum);
     }
   } else if (level == 'medium') {
@@ -39,22 +47,36 @@ function possibilitiesGenerator(
       generateNum = ez1;
     } else if (digits == 2) {
       let merged = hard.map(f => ez2.map(s => f + s));
-      generateNum = merged.flat();
+      generateNum = merged.reduce(
+        (accumulator, value) => accumulator.concat(value),
+        []
+      );
     } else if (digits == 3) {
       let merged = hard
-        .map(f => ez2.map(s => hard.map(th => f + s + th)));
-      generateNum = merged.flat(2);
+        .map(f => ez2.map(s => hard.map(th => f + s + th)))
+        .reduce((accumulator, value) => accumulator.concat(value), []);
+      generateNum = merged.reduce(
+        (accumulator, value) => accumulator.concat(value),
+        []
+      );
     }
   } else if (level == 'Difficult') {
     if (digits == 1) {
       generateNum = hard;
     } else if (digits == 2) {
       let merged = hard.map(f => hard.map(s => f + s));
-      generateNum = merged.flat();
+      generateNum = merged.reduce(
+        (accumulator, value) => accumulator.concat(value),
+        []
+      );
     } else if (digits == 3) {
       let merged = hard
-        .map(f => ez2.map(s => ez2.map(th => f + s + th)));
-      generateNum = merged.flat(2);
+        .map(f => ez2.map(s => ez2.map(th => f + s + th)))
+        .reduce((accumulator, value) => accumulator.concat(value), []);
+      generateNum = merged.reduce(
+        (accumulator, value) => accumulator.concat(value),
+        []
+      );
     }
   }
   possibilityTree[rules][digits][level] = generateNum;
@@ -62,12 +84,12 @@ function possibilitiesGenerator(
   return possibilityTree;
 }
 
-export function generateForFirstThreeDigits(
+export const generateForFirstThreeDigits = (
   possibilityTree: PossibilityTree,
   rules: number,
   digits: number,
   level: string
-) {
+) => {
   if (possibilityTree[rules][digits][level][0] == '') {
     possibilityTree[rules][digits][level].splice(0, 1);
   }
@@ -80,7 +102,7 @@ export function generateForFirstThreeDigits(
     );
   }
 
-  console.log(possibilityTree);
+  //console.log(possibilityTree);
   let copyArr = {
     possibel: possibilityTree,
     generate: {
@@ -99,7 +121,7 @@ export function generateForFirstThreeDigits(
     copyArr.possibel[rules][digits][level] = possibilityTree[rules][digits][
       level
     ].filter(value => value != sNum);
-    console.log(copyArr.possibel[rules][digits][level]);
+    //console.log(copyArr.possibel[rules][digits][level]);
     copyArr.generate.answers = ansArray(fNum, +sNum);
     copyArr.generate.firstNumber = fNum;
     copyArr.generate.secondNumber = +sNum;
@@ -107,7 +129,7 @@ export function generateForFirstThreeDigits(
     throw Error(err);
   }
   return copyArr;
-}
+};
 
 export function generateForLastDigits(
   arr: number[],
