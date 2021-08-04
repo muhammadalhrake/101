@@ -30,9 +30,9 @@ function possibilitiesGenerator(
       let merged = ez1.map(f => ez2.map(s => f + s));
       generateNum = merged.flat();
     } else if (digits == 3) {
-      let merged = ez1.map(f => ez2.map(s => ez2.map(th => f + s + th))).flat();
-      generateNum = merged.flat();
-      console.log(generateNum);
+      let merged = ez1.map(f => ez2.map(s => ez2.map(th => f + s + th)));
+      generateNum = merged.flat(2);
+      //console.log(generateNum);
     }
   } else if (level == 'medium') {
     if (digits == 1) {
@@ -42,9 +42,8 @@ function possibilitiesGenerator(
       generateNum = merged.flat();
     } else if (digits == 3) {
       let merged = hard
-        .map(f => ez2.map(s => hard.map(th => f + s + th)))
-        .flat();
-      generateNum = merged.flat();
+        .map(f => ez2.map(s => hard.map(th => f + s + th)));
+      generateNum = merged.flat(2);
     }
   } else if (level == 'Difficult') {
     if (digits == 1) {
@@ -54,9 +53,8 @@ function possibilitiesGenerator(
       generateNum = merged.flat();
     } else if (digits == 3) {
       let merged = hard
-        .map(f => ez2.map(s => ez2.map(th => f + s + th)))
-        .flat();
-      generateNum = merged.flat();
+        .map(f => ez2.map(s => ez2.map(th => f + s + th)));
+      generateNum = merged.flat(2);
     }
   }
   possibilityTree[rules][digits][level] = generateNum;
