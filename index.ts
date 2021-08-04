@@ -103,7 +103,7 @@ function ozoGeneration(
   }
   return generationArr;
 }
-//console.log(ozoGeneration(40,['1'],['4'],['Easy','medium','Difficult']))
+//console.log(ozoGeneration(40,['1'],['1'],['Easy','medium','Difficult']))
 //setInterval(()=>console.log(generateForLastDigits(possibilityArrForMoreThanThreeDigits, 5, 5,'medium')),500)
 //console.log(possibilityTree[1][1]['Difficult'])
 //setInterval(()=>console.log(ozoGeneration(40,['6','7','8','9'],['4','5','6','7','8','9'],['Easy','medium','Difficult'])),500)
