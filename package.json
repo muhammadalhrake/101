@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "random": "^3.0.6"
+    "random": "3.0.6",
+    "tslib": "^2.3.0"
   }
 }
