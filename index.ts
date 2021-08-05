@@ -70,11 +70,11 @@ function ozoGeneration(
           for (let l = 0; l < levels.length && i < count; l++) {
             //initial settings
             let generateQuestion;
-            let rule = +rules[j];
-            let digit = +digits[k];
-            let level = levels[l];
+            const rule = +rules[j];
+            const digit = +digits[k];
+            const level = levels[l];
             if (digit <= 3) {
-              let status = generateForFirstThreeDigits(
+              const status = generateForFirstThreeDigits(
                 possibilityTree,
                 rule,
                 digit,
@@ -83,7 +83,7 @@ function ozoGeneration(
               possibilityTree = status.possibel;
               generateQuestion = status.generate;
             } else {
-              let status = generateForLastDigits(
+              const status = generateForLastDigits(
                 possibilityArrForMoreThanThreeDigits,
                 rule,
                 digit,
